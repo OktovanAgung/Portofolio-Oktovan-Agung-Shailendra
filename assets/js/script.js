@@ -1,3 +1,4 @@
+
 function loadContent(page, containerId) {
     fetch(page)
         .then(response => response.text())
@@ -11,12 +12,13 @@ function loadContent(page, containerId) {
         });
 }
 
+/*
 // Memuat konten testimonials ke dalam container
 loadContent('assets/html/testimonials.html', 'testimonials-container');
 
 // Memuat konten clients ke dalam container
 loadContent('assets/html/clients.html', 'clients-container');
-
+*/
 
 
 'use strict';
