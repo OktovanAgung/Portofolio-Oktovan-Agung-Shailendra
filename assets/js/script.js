@@ -1,37 +1,18 @@
-
-function loadContent(page, containerId) {
-    fetch(page)
-        .then(response => response.text())
-        .then(data => {
-            // Menyisipkan konten HTML yang dimuat ke dalam container yang sesuai
-            document.getElementById(containerId).innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error loading the page:', error);
-            document.getElementById(containerId).innerHTML = '<p>Failed to load content. Please try again later.</p>';
-        });
-}
-
-/*
-// Memuat konten testimonials ke dalam container
-loadContent('assets/html/testimonials.html', 'testimonials-container');
-
-// Memuat konten clients ke dalam container
-loadContent('assets/html/clients.html', 'clients-container');
-*/
-
-
-'use strict';
+"use strict";
 
 // element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); };
+const elementToggleFunc = function (elem) {
+    elem.classList.toggle("active");
+};
 
 // sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 // sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+sidebarBtn.addEventListener("click", function () {
+    elementToggleFunc(sidebar);
+});
 
 // testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
@@ -48,25 +29,27 @@ const modalText = document.querySelector("[data-modal-text]");
 const testimonialsModalFunc = function () {
     modalContainer.classList.toggle("active");
     overlay.classList.toggle("active");
+};
+
+// add click event to all modal items
+for (let i = 0; i < testimonialsItem.length; i++) {
+    testimonialsItem[i].addEventListener("click", function () {
+        modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
+        modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
+        modalTitle.innerHTML = this.querySelector(
+            "[data-testimonials-title]"
+        ).innerHTML;
+        modalText.innerHTML = this.querySelector(
+            "[data-testimonials-text]"
+        ).innerHTML;
+
+        testimonialsModalFunc();
+    });
 }
 
-// Only add the event listeners for testimonials if they exist
-if (testimonialsItem.length > 0) {
-    for (let i = 0; i < testimonialsItem.length; i++) {
-        testimonialsItem[i].addEventListener("click", function () {
-            modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-            modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-            modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-            modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-            testimonialsModalFunc();
-        });
-    }
-
-    // add click event to modal close button
-    modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-    overlay.addEventListener("click", testimonialsModalFunc);
-}
+// add click event to modal close button
+modalCloseBtn.addEventListener("click", testimonialsModalFunc);
+overlay.addEventListener("click", testimonialsModalFunc);
 
 // custom select variables
 const select = document.querySelector("[data-select]");
@@ -74,7 +57,9 @@ const selectItems = document.querySelectorAll("[data-select-item]");
 const selectValue = document.querySelector("[data-selecct-value]");
 const filterBtn = document.querySelectorAll("[data-filter-btn]");
 
-select.addEventListener("click", function () { elementToggleFunc(this); });
+select.addEventListener("click", function () {
+    elementToggleFunc(this);
+});
 
 // add event in all select items
 for (let i = 0; i < selectItems.length; i++) {
@@ -99,7 +84,7 @@ const filterFunc = function (selectedValue) {
             filterItems[i].classList.remove("active");
         }
     }
-}
+};
 
 // add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
