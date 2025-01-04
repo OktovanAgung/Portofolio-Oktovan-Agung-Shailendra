@@ -74,12 +74,18 @@ body {
 }
 
 article {
+  display: none;
   background: var(--eerie-black-1);
-
+  z-index: 1;
   border-radius: 20px;
   padding: 15px;
   box-shadow: var(--shadow-1);
   z-index: 1;
+}
+
+article.active {
+  display: block;
+  animation: fade 0.5s ease backwards;
 }
 
 .separator {
@@ -115,15 +121,6 @@ article {
 
 .icon-box ion-icon {
   --ionicon-stroke-width: 35px;
-}
-
-article {
-  display: none;
-}
-
-article.active {
-  display: block;
-  animation: fade 0.5s ease backwards;
 }
 
 @keyframes fade {

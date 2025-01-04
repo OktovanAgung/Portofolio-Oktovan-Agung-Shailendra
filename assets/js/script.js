@@ -14,6 +14,48 @@ sidebarBtn.addEventListener("click", function () {
     elementToggleFunc(sidebar);
 });
 
+// page navigation variables
+const navigationLinks = document.querySelectorAll("[data-nav-link]");
+const pages = document.querySelectorAll("[data-page]");
+
+// add event to all nav link
+for (let i = 0; i < navigationLinks.length; i++) {
+    navigationLinks[i].addEventListener("click", function () {
+        for (let i = 0; i < pages.length; i++) {
+            if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
+                pages[i].classList.add("active");
+                navigationLinks[i].classList.add("active");
+                window.scrollTo(0, 0);
+                loadPageContent(pages[i].dataset.page); // load content dynamically
+            } else {
+                pages[i].classList.remove("active");
+                navigationLinks[i].classList.remove("active");
+            }
+        }
+    });
+}
+
+// Function to load HTML content dynamically
+// Fungsi untuk memuat konten
+function loadContent(page, url) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+        document.getElementById(page + '-content').innerHTML = data;
+    });
+}
+
+// Memuat konten setiap halaman
+loadContent('about', './assets/html/about.html');
+loadContent('resume', './assets/html/resume.html');
+loadContent('portofolio', './assets/html/portofolio.html');
+loadContent('blog', './assets/html/blog.html');
+loadContent('contact', './assets/html/contact.html');s  
+
+// Load the initial page content for the active page
+loadPageContent('about'); // This will load the "about.html" initially
+
+
 // testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
 const modalContainer = document.querySelector("[data-modal-container]");
@@ -114,26 +156,6 @@ for (let i = 0; i < formInputs.length; i++) {
             formBtn.removeAttribute("disabled");
         } else {
             formBtn.setAttribute("disabled", "");
-        }
-    });
-}
-
-// page navigation variables
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
-
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-    navigationLinks[i].addEventListener("click", function () {
-        for (let i = 0; i < pages.length; i++) {
-            if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-                pages[i].classList.add("active");
-                navigationLinks[i].classList.add("active");
-                window.scrollTo(0, 0);
-            } else {
-                pages[i].classList.remove("active");
-                navigationLinks[i].classList.remove("active");
-            }
         }
     });
 }
