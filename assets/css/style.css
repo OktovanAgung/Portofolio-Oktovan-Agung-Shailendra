@@ -64,10 +64,18 @@ body {
   #REUSED STYLE
 \*-----------------------------------*/
 
-.sidebar,
-article {
-  background: var(--eerie-black-2);
+.sidebar {
+  background: var(--eerie-black-1);
   border: 1px solid var(--jet);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: var(--shadow-1);
+  z-index: 1;
+}
+
+article {
+  background: var(--eerie-black-1);
+
   border-radius: 20px;
   padding: 15px;
   box-shadow: var(--shadow-1);
@@ -219,6 +227,16 @@ main {
   margin-bottom: 75px;
   min-width: 259px;
 }
+
+
+.main-content {
+  background-color: var(--eerie-black-1);
+  border: 1px solid var(--jet);
+  border-radius: 20px;
+}
+
+
+
 
 /*-----------------------------------*\
   #SIDEBAR
