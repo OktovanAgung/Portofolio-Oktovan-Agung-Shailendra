@@ -74,9 +74,8 @@ body {
 }
 
 article {
-  display: none;
   background: var(--eerie-black-1);
-  z-index: 1;
+  display: none;
   border-radius: 20px;
   padding: 15px;
   box-shadow: var(--shadow-1);

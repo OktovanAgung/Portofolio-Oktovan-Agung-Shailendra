@@ -14,26 +14,31 @@ sidebarBtn.addEventListener("click", function () {
     elementToggleFunc(sidebar);
 });
 
-// page navigation variables
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
+// Fungsi untuk menangani transisi antar halaman
+function switchPage(pageName) {
+    // Ambil semua elemen artikel dengan kelas 'page'
+    const allPages = document.querySelectorAll('.page');
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-    navigationLinks[i].addEventListener("click", function () {
-        for (let i = 0; i < pages.length; i++) {
-            if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-                pages[i].classList.add("active");
-                navigationLinks[i].classList.add("active");
-                window.scrollTo(0, 0);
-                loadPageContent(pages[i].dataset.page); // load content dynamically
-            } else {
-                pages[i].classList.remove("active");
-                navigationLinks[i].classList.remove("active");
-            }
-        }
+    // Hapus kelas 'active' dari semua halaman
+    allPages.forEach(page => {
+        page.classList.remove('active');
     });
+
+    // Tampilkan halaman yang sesuai dengan pageName
+    const activePage = document.querySelector(`#${pageName}-page`);
+    if (activePage) {
+        activePage.classList.add('active');
+    }
 }
+
+// Menambahkan event listener untuk tombol navbar
+document.querySelectorAll('.navbar-link').forEach(button => {
+    button.addEventListener('click', function(event) {
+        const targetPage = event.target.getAttribute('data-page'); // Ambil nilai data-page dari tombol
+        switchPage(targetPage); // Panggil fungsi switchPage
+    });
+});
+
 
 // Function to load HTML content dynamically
 // Fungsi untuk memuat konten
@@ -52,8 +57,7 @@ loadContent('portofolio', './assets/html/portofolio.html');
 loadContent('blog', './assets/html/blog.html');
 loadContent('contact', './assets/html/contact.html');s  
 
-// Load the initial page content for the active page
-loadPageContent('about'); // This will load the "about.html" initially
+
 
 
 // testimonials variables
