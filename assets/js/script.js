@@ -31,13 +31,31 @@ function switchPage(pageName) {
     }
 }
 
-// Menambahkan event listener untuk tombol navbar
-document.querySelectorAll('.navbar-link').forEach(button => {
-    button.addEventListener('click', function(event) {
-        const targetPage = event.target.getAttribute('data-page'); // Ambil nilai data-page dari tombol
-        switchPage(targetPage); // Panggil fungsi switchPage
+document.addEventListener('DOMContentLoaded', function () {
+    // Menambahkan kelas 'active' pada navbar-link sesuai dengan halaman pertama yang dimuat
+    const defaultPage = 'about'; // Sesuaikan dengan halaman pertama yang ingin ditampilkan
+    const defaultButton = document.querySelector(`[data-page="${defaultPage}"]`);
+    if (defaultButton) {
+        defaultButton.classList.add('active');
+    }
+
+    // Menambahkan event listener untuk navbar link
+    document.querySelectorAll('.navbar-link').forEach(button => {
+        button.addEventListener('click', function(event) {
+            const targetPage = event.target.getAttribute('data-page');
+            switchPage(targetPage);
+
+            // Menghapus kelas 'active' dari semua tombol navbar
+            document.querySelectorAll('.navbar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Menambahkan kelas 'active' pada tombol yang diklik
+            event.target.classList.add('active');
+        });
     });
 });
+
 
 
 // Function to load HTML content dynamically
