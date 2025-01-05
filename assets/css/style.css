@@ -136,7 +136,7 @@ article.active {
 .h3,
 .h4,
 .h5 {
-  color: var(--white-2);
+  color: white;
   text-transform: capitalize;
 }
 
@@ -1223,6 +1223,7 @@ textarea.form-input::-webkit-resizer {
 }
 
 
+/* Menampilkan popup secara permanen selama pengeditan */
 .popup {
   position: fixed;
   top: 0;
@@ -1231,46 +1232,80 @@ textarea.form-input::-webkit-resizer {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   /* Lebih gelap untuk kesan lebih elegan */
-  display: flex;
+  display: flex !important;
+  /* Menjaga agar popup selalu muncul */
   justify-content: center;
   align-items: center;
 }
 
+/* Tampilan konten popup */
 .popup-content {
-  background-color: var(--white-2);
-  /* Sesuaikan dengan warna latar belakang lain */
+  background-color: var(--eerie-black-1);
   padding: 20px;
   border-radius: 14px;
-  /* Gunakan radius border yang sama dengan elemen lain */
   text-align: center;
   box-shadow: var(--shadow-3);
-  /* Gunakan shadow yang konsisten dengan desain lainnya */
+
 }
 
+.popup-content p {
+  color: var(--white-2);
+  margin-bottom: 20px;
+  /* Menambahkan jarak bawah agar ada ruang antara teks dan tombol */
+}
+
+/* Tombol di dalam popup disesuaikan dengan gaya .form-btn */
 .popup-content button {
-  margin-top: 15px;
-  padding: 13px 20px;
-  border: 1px solid var(--jet);
-  /* Border yang konsisten */
-  background-color: var(--border-gradient-onyx);
-  /* Gunakan warna latar belakang serupa dengan tombol form */
+  position: relative;
+  width: 50%;
+  margin: 0 auto;
+  background: var(--border-gradient-onyx);
   color: var(--orange-yellow-crayola);
-  /* Sesuaikan dengan warna tombol lainnya */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
   border-radius: 14px;
-  /* Radius yang sama dengan tombol lainnya */
-  cursor: pointer;
   font-size: var(--fs-6);
-  /* Ukuran font yang konsisten */
+  text-transform: capitalize;
+  box-shadow: var(--shadow-3);
+  z-index: 1;
   transition: var(--transition-1);
-  /* Transisi yang konsisten */
 }
 
+/* Efek hover tombol */
 .popup-content button:hover {
-  background-color: var(--bg-gradient-yellow-1);
-  /* Sesuaikan dengan hover tombol lainnya */
+  background: var(--bg-gradient-yellow-1);
 }
 
+/* Efek sebelum hover untuk tombol */
+.popup-content button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+  transition: var(--transition-1);
+}
+
+/* Efek saat hover tombol */
+.popup-content button:hover::before {
+  background: var(--bg-gradient-yellow-2);
+}
+
+/* Tombol dinonaktifkan */
 .popup-content button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+/* Efek saat tombol dinonaktifkan */
+.popup-content button:disabled:hover {
+  background: var(--border-gradient-onyx);
+}
+
+.popup-content button:disabled:hover::before {
+  background: var(--bg-gradient-jet);
 }
