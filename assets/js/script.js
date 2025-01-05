@@ -70,10 +70,11 @@ function loadContent(page, url) {
 
 // Memuat konten setiap halaman
 loadContent('about', './assets/html/about.html');
+/*loadContent('testimonial', './assets/html/testimonial_clients.html');*/
 loadContent('resume', './assets/html/resume.html');
 loadContent('portofolio', './assets/html/portofolio.html');
 loadContent('blog', './assets/html/blog.html');
-loadContent('contact', './assets/html/contact.html');s  
+loadContent('contact', './assets/html/contact.html');  
 
 
 
