@@ -16,18 +16,49 @@ sidebarBtn.addEventListener("click", function () {
 
 // Fungsi untuk menangani transisi antar halaman
 function switchPage(pageName) {
-    // Ambil semua elemen artikel dengan kelas 'page'
     const allPages = document.querySelectorAll('.page');
+    allPages.forEach(page => page.classList.remove('active'));
 
-    // Hapus kelas 'active' dari semua halaman
-    allPages.forEach(page => {
-        page.classList.remove('active');
-    });
-
-    // Tampilkan halaman yang sesuai dengan pageName
     const activePage = document.querySelector(`#${pageName}-page`);
     if (activePage) {
         activePage.classList.add('active');
+    }
+
+    // Re-bind form submission and popup logic after page switch
+    if (pageName === "contact") {
+        const form = document.querySelector("[data-form]");
+        const popupSuccess = document.getElementById("popup-success");
+        const closePopupButton = document.getElementById("close-popup");
+
+        if (form) {
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        headers: { Accept: "application/json" },
+                        body: formData,
+                    });
+
+                    if (response.ok) {
+                        popupSuccess.style.display = "flex";
+                        form.reset();
+                    } else {
+                        alert("Oops! Something went wrong.");
+                    }
+                } catch (error) {
+                    alert("There was an error submitting the form.");
+                }
+            });
+        }
+
+        if (closePopupButton) {
+            closePopupButton.addEventListener("click", () => {
+                popupSuccess.style.display = "none";
+            });
+        }
     }
 }
 
@@ -166,19 +197,79 @@ for (let i = 0; i < filterBtn.length; i++) {
     });
 }
 
-// contact form variables
+// Select form and popup elements
 const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
+const popupSuccess = document.getElementById("popup-success");
+const closePopupButton = document.getElementById("close-popup");
 
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-    formInputs[i].addEventListener("input", function () {
-        // check form validation
-        if (form.checkValidity()) {
-            formBtn.removeAttribute("disabled");
-        } else {
-            formBtn.setAttribute("disabled", "");
-        }
+// Handle form submission
+form.addEventListener("submit", async (event) => {
+  event.preventDefault(); // Prevent default form submission
+  
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      headers: { Accept: "application/json" },
+      body: formData,
     });
-}
+
+    if (response.ok) {
+      // Show success popup
+      popupSuccess.style.display = "flex";
+      form.reset(); // Reset form fields
+    } else {
+      alert("Oops! Something went wrong. Please try again.");
+    }
+  } catch (error) {
+    alert("There was a problem submitting the form. Please try again later.");
+  }
+});
+
+// Handle popup close button
+closePopupButton.addEventListener("click", () => {
+  popupSuccess.style.display = "none";
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Variabel form dan popup
+    const form = document.querySelector("[data-form]");
+    const popupSuccess = document.getElementById("popup-success");
+    const closePopupButton = document.getElementById("close-popup");
+
+    if (form) {
+        // Handle form submission
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault(); // Prevent default form submission
+            
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: { Accept: "application/json" },
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    // Tampilkan popup sukses
+                    popupSuccess.style.display = "flex";
+                    form.reset(); // Reset form fields
+                } else {
+                    alert("Oops! Something went wrong. Please try again.");
+                }
+            } catch (error) {
+                alert("There was a problem submitting the form. Please try again later.");
+            }
+        });
+    }
+
+    // Handle popup close button
+    if (closePopupButton) {
+        closePopupButton.addEventListener("click", () => {
+            popupSuccess.style.display = "none";
+        });
+    }
+});
