@@ -871,6 +871,16 @@ main {
   transition: 0.15s ease-in-out;
 }
 
+/* Pastikan select-list menutupi elemen lain */
+.select-list.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  z-index: 9999;
+  /* Pastikan lebih tinggi dari elemen lain */
+}
+
+
 .filter-select.active+.select-list {
   opacity: 1;
   visibility: visible;

@@ -88,9 +88,83 @@ function loadContent(page, url) {
     fetch(url)
         .then(response => response.text())
         .then(data => {
-        document.getElementById(page + '-content').innerHTML = data;
-    });
+            document.getElementById(page + '-content').innerHTML = data;
+            if (page === 'portofolio') {
+                // Panggil ulang kode filter kategori setelah portofolio dimuat
+                initializePortfolioFilters();
+            }
+        });
 }
+
+// Menangani filter kategori (desktop dan mobile)
+function initializePortfolioFilters() {
+    const filterBtns = document.querySelectorAll('[data-filter-btn]');
+    const selectItems = document.querySelectorAll('[data-select-item]');
+    const projectItems = document.querySelectorAll('.project-item');
+    const filterSelect = document.querySelector('.filter-select');
+    const selectList = document.querySelector('.select-list');
+    
+    // Fungsi untuk menyaring proyek berdasarkan kategori
+    function filterProjects(category) {
+        projectItems.forEach(project => {
+            const projectCategory = project.getAttribute('data-category');
+            // Menampilkan proyek jika kategori cocok atau 'All' dipilih
+            if (category === 'all' || projectCategory === category) {
+                project.classList.add('active');
+            } else {
+                project.classList.remove('active');
+            }
+        });
+    }
+
+    // Event listener untuk tombol filter kategori (desktop)
+    filterBtns.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const selectedCategory = e.target.textContent.trim().toLowerCase();
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            filterProjects(selectedCategory);
+        });
+    });
+
+    // Event listener untuk item dropdown kategori (mobile)
+    selectItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const selectedCategory = e.target.textContent.trim().toLowerCase();
+            filterProjects(selectedCategory);
+            closeDropdown(); // Menutup dropdown setelah kategori dipilih
+        });
+    });
+
+    // Fungsi untuk membuka/menutup dropdown saat tombol filter dipilih
+    filterSelect.addEventListener('click', () => {
+        filterSelect.classList.toggle('active'); // Menambahkan/menanggalkan class 'active'
+        selectList.classList.toggle('active'); // Menampilkan/menyembunyikan daftar dropdown
+    });
+
+    // Menyaring proyek berdasarkan kategori awal (All)
+    filterProjects('all');
+}
+
+// Menutup dropdown
+function closeDropdown() {
+    const filterSelect = document.querySelector('.filter-select');
+    const selectList = document.querySelector('.select-list');
+    filterSelect.classList.remove('active');
+    selectList.classList.remove('active');
+}
+
+// Inisialisasi filter ketika halaman dimuat
+document.addEventListener('DOMContentLoaded', initializePortfolioFilters);
+
+// Fungsi untuk menutup dropdown (jika diperlukan)
+function closeDropdown() {
+    const dropdown = document.querySelector('.dropdown'); // Sesuaikan dengan class atau ID dropdown kamu
+    if (dropdown) {
+        dropdown.classList.remove('open'); // Menutup dropdown
+    }
+}
+
 
 // Memuat konten setiap halaman
 loadContent('about', './assets/html/about.html');
