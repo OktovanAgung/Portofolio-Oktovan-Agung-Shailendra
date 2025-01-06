@@ -868,6 +868,7 @@ main {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  /* Menonaktifkan interaksi saat dropdown tidak aktif */
   transition: 0.15s ease-in-out;
 }
 
@@ -876,8 +877,7 @@ main {
   opacity: 1;
   visibility: visible;
   pointer-events: all;
-  z-index: 9999;
-  /* Pastikan lebih tinggi dari elemen lain */
+  /* Mengaktifkan interaksi saat dropdown aktif */
 }
 
 

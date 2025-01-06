@@ -131,10 +131,18 @@ function initializePortfolioFilters() {
     selectItems.forEach(item => {
         item.addEventListener('click', (e) => {
             const selectedCategory = e.target.textContent.trim().toLowerCase();
-            filterProjects(selectedCategory);
+            filterProjects(selectedCategory); // Menyaring proyek berdasarkan kategori
             closeDropdown(); // Menutup dropdown setelah kategori dipilih
         });
     });
+    
+    function closeDropdown() {
+        const filterSelect = document.querySelector('.filter-select');
+        const selectList = document.querySelector('.select-list');
+        filterSelect.classList.remove('active');  // Hapus class 'active' untuk menutup dropdown
+        selectList.classList.remove('active');   // Hapus class 'active' untuk menutup dropdown
+    }
+    
 
     // Fungsi untuk membuka/menutup dropdown saat tombol filter dipilih
     filterSelect.addEventListener('click', () => {
@@ -146,13 +154,7 @@ function initializePortfolioFilters() {
     filterProjects('all');
 }
 
-// Menutup dropdown
-function closeDropdown() {
-    const filterSelect = document.querySelector('.filter-select');
-    const selectList = document.querySelector('.select-list');
-    filterSelect.classList.remove('active');
-    selectList.classList.remove('active');
-}
+
 
 // Inisialisasi filter ketika halaman dimuat
 document.addEventListener('DOMContentLoaded', initializePortfolioFilters);
