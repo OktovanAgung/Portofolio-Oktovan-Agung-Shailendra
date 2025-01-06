@@ -29,19 +29,16 @@ function switchPage(pageName) {
         const form = document.querySelector("[data-form]");
         const popupSuccess = document.getElementById("popup-success");
         const closePopupButton = document.getElementById("close-popup");
-
         if (form) {
             form.addEventListener("submit", async (event) => {
                 event.preventDefault();
                 const formData = new FormData(form);
-
                 try {
                     const response = await fetch(form.action, {
                         method: form.method,
                         headers: { Accept: "application/json" },
                         body: formData,
                     });
-
                     if (response.ok) {
                         popupSuccess.style.display = "flex";
                         form.reset();
@@ -53,7 +50,6 @@ function switchPage(pageName) {
                 }
             });
         }
-
         if (closePopupButton) {
             closePopupButton.addEventListener("click", () => {
                 popupSuccess.style.display = "none";
@@ -75,18 +71,15 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function(event) {
             const targetPage = event.target.getAttribute('data-page');
             switchPage(targetPage);
-
             // Menghapus kelas 'active' dari semua tombol navbar
             document.querySelectorAll('.navbar-link').forEach(link => {
                 link.classList.remove('active');
             });
-
             // Menambahkan kelas 'active' pada tombol yang diklik
             event.target.classList.add('active');
         });
     });
 });
-
 
 
 // Function to load HTML content dynamically
@@ -106,9 +99,6 @@ loadContent('resume', './assets/html/resume.html');
 loadContent('portofolio', './assets/html/portofolio.html');
 loadContent('blog', './assets/html/blog.html');
 loadContent('contact', './assets/html/contact.html');  
-
-
-
 
 // testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
@@ -138,7 +128,6 @@ for (let i = 0; i < testimonialsItem.length; i++) {
         modalText.innerHTML = this.querySelector(
             "[data-testimonials-text]"
         ).innerHTML;
-
         testimonialsModalFunc();
     });
 }
@@ -147,55 +136,9 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
 
-// custom select variables
-const select = document.querySelector("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-
 select.addEventListener("click", function () {
     elementToggleFunc(this);
 });
-
-// add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-    selectItems[i].addEventListener("click", function () {
-        let selectedValue = this.innerText.toLowerCase();
-        selectValue.innerText = this.innerText;
-        elementToggleFunc(select);
-        filterFunc(selectedValue);
-    });
-}
-
-// filter variables
-const filterItems = document.querySelectorAll("[data-filter-item]");
-
-const filterFunc = function (selectedValue) {
-    for (let i = 0; i < filterItems.length; i++) {
-        if (selectedValue === "all") {
-            filterItems[i].classList.add("active");
-        } else if (selectedValue === filterItems[i].dataset.category) {
-            filterItems[i].classList.add("active");
-        } else {
-            filterItems[i].classList.remove("active");
-        }
-    }
-};
-
-// add event in all filter button items for large screen
-let lastClickedBtn = filterBtn[0];
-
-for (let i = 0; i < filterBtn.length; i++) {
-    filterBtn[i].addEventListener("click", function () {
-        let selectedValue = this.innerText.toLowerCase();
-        selectValue.innerText = this.innerText;
-        filterFunc(selectedValue);
-
-        lastClickedBtn.classList.remove("active");
-        this.classList.add("active");
-        lastClickedBtn = this;
-    });
-}
 
 // Select form and popup elements
 const form = document.querySelector("[data-form]");
@@ -205,31 +148,31 @@ const closePopupButton = document.getElementById("close-popup");
 // Handle form submission
 form.addEventListener("submit", async (event) => {
   event.preventDefault(); // Prevent default form submission
-  
-  const formData = new FormData(form);
 
-  try {
+const formData = new FormData(form);
+
+try {
     const response = await fetch(form.action, {
-      method: form.method,
-      headers: { Accept: "application/json" },
-      body: formData,
+    method: form.method,
+    headers: { Accept: "application/json" },
+    body: formData,
     });
 
     if (response.ok) {
       // Show success popup
-      popupSuccess.style.display = "flex";
+    popupSuccess.style.display = "flex";
       form.reset(); // Reset form fields
     } else {
-      alert("Oops! Something went wrong. Please try again.");
+    alert("Oops! Something went wrong. Please try again.");
     }
-  } catch (error) {
+} catch (error) {
     alert("There was a problem submitting the form. Please try again later.");
-  }
+}
 });
 
 // Handle popup close button
 closePopupButton.addEventListener("click", () => {
-  popupSuccess.style.display = "none";
+popupSuccess.style.display = "none";
 });
 
 
