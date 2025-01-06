@@ -1,0 +1,71 @@
+/* Tampilan konten popup */
+.popup-content {
+background-color: var(--eerie-black-1);
+padding: 20px;
+border-radius: 14px;
+border: 1px solid var(--jet);
+text-align: center;
+box-shadow: var(--shadow-3);
+}
+
+.popup-content p {
+color: var(--white-2);
+margin-bottom: 20px;
+/* Menambahkan jarak bawah agar ada ruang antara teks dan tombol */
+}
+
+/* Tombol di dalam popup disesuaikan dengan gaya .form-btn */
+.popup-content button {
+position: relative;
+width: 50%;
+margin: 0 auto;
+background: var(--border-gradient-onyx);
+color: var(--orange-yellow-crayola);
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+padding: 13px 20px;
+border-radius: 14px;
+font-size: var(--fs-6);
+text-transform: capitalize;
+box-shadow: var(--shadow-3);
+z-index: 1;
+transition: var(--transition-1);
+}
+
+/* Efek hover tombol */
+.popup-content button:hover {
+background: var(--bg-gradient-yellow-1);
+}
+
+/* Efek sebelum hover untuk tombol */
+.popup-content button::before {
+content: "";
+position: absolute;
+inset: 1px;
+background: var(--bg-gradient-jet);
+border-radius: inherit;
+z-index: -1;
+transition: var(--transition-1);
+}
+
+/* Efek saat hover tombol */
+.popup-content button:hover::before {
+background: var(--bg-gradient-yellow-2);
+}
+
+/* Tombol dinonaktifkan */
+.popup-content button:disabled {
+opacity: 0.7;
+cursor: not-allowed;
+}
+
+/* Efek saat tombol dinonaktifkan */
+.popup-content button:disabled:hover {
+background: var(--border-gradient-onyx);
+}
+
+.popup-content button:disabled:hover::before {
+background: var(--bg-gradient-jet);
+}

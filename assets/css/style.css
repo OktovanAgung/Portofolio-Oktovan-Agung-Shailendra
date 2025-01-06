@@ -1222,8 +1222,7 @@ textarea.form-input::-webkit-resizer {
   background: var(--bg-gradient-jet);
 }
 
-
-/* Menampilkan popup secara permanen selama pengeditan */
+/* Popup yang hanya muncul saat diperlukan */
 .popup {
   position: fixed;
   top: 0;
@@ -1231,9 +1230,9 @@ textarea.form-input::-webkit-resizer {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  /* Lebih gelap untuk kesan lebih elegan */
-  display: flex !important;
-  /* Menjaga agar popup selalu muncul */
+  /* Background semi-transparan */
+  display: none;
+  /* Popup hanya muncul ketika diaktifkan */
   justify-content: center;
   align-items: center;
 }
@@ -1241,17 +1240,21 @@ textarea.form-input::-webkit-resizer {
 /* Tampilan konten popup */
 .popup-content {
   background-color: var(--eerie-black-1);
+  /* Warna latar belakang */
   padding: 20px;
   border-radius: 14px;
+  border: 1px solid var(--jet);
+  /* Border yang konsisten */
   text-align: center;
   box-shadow: var(--shadow-3);
-
+  /* Bayangan untuk tampilan lebih elegan */
 }
 
 .popup-content p {
   color: var(--white-2);
+  /* Warna teks */
   margin-bottom: 20px;
-  /* Menambahkan jarak bawah agar ada ruang antara teks dan tombol */
+  /* Jarak antara teks dan tombol */
 }
 
 /* Tombol di dalam popup disesuaikan dengan gaya .form-btn */
@@ -1260,7 +1263,9 @@ textarea.form-input::-webkit-resizer {
   width: 50%;
   margin: 0 auto;
   background: var(--border-gradient-onyx);
+  /* Background tombol */
   color: var(--orange-yellow-crayola);
+  /* Warna teks tombol */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1268,15 +1273,20 @@ textarea.form-input::-webkit-resizer {
   padding: 13px 20px;
   border-radius: 14px;
   font-size: var(--fs-6);
+  /* Ukuran font */
   text-transform: capitalize;
+  /* Kapitalisasi teks */
   box-shadow: var(--shadow-3);
+  /* Bayangan tombol */
   z-index: 1;
   transition: var(--transition-1);
+  /* Efek transisi */
 }
 
 /* Efek hover tombol */
 .popup-content button:hover {
   background: var(--bg-gradient-yellow-1);
+  /* Hover effect */
 }
 
 /* Efek sebelum hover untuk tombol */
@@ -1285,6 +1295,7 @@ textarea.form-input::-webkit-resizer {
   position: absolute;
   inset: 1px;
   background: var(--bg-gradient-jet);
+  /* Warna border sebelum hover */
   border-radius: inherit;
   z-index: -1;
   transition: var(--transition-1);
@@ -1293,6 +1304,7 @@ textarea.form-input::-webkit-resizer {
 /* Efek saat hover tombol */
 .popup-content button:hover::before {
   background: var(--bg-gradient-yellow-2);
+  /* Warna border saat hover */
 }
 
 /* Tombol dinonaktifkan */
@@ -1304,8 +1316,10 @@ textarea.form-input::-webkit-resizer {
 /* Efek saat tombol dinonaktifkan */
 .popup-content button:disabled:hover {
   background: var(--border-gradient-onyx);
+  /* Warna tombol saat dinonaktifkan */
 }
 
 .popup-content button:disabled:hover::before {
   background: var(--bg-gradient-jet);
+  /* Warna border tombol dinonaktifkan */
 }
