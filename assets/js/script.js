@@ -79,6 +79,41 @@ document.addEventListener('DOMContentLoaded', function () {
             event.target.classList.add('active');
         });
     });
+    const popup = document.getElementById("portfolio-popup");
+    const closePopupButton = document.querySelector(".close-popup");
+    const projectItems = document.querySelectorAll(".project-item");
+    const sliderContainer = document.querySelector(".slider-container");
+
+    if (!popup || !closePopupButton || !sliderContainer) return;
+
+    let currentIndex = 0;
+
+    // Show popup on project item click
+    projectItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            popup.classList.remove("hidden");
+            popup.style.opacity = "1";
+            popup.style.visibility = "visible";
+        });
+    });
+
+    // Close popup
+    closePopupButton.addEventListener("click", () => {
+        popup.classList.add("hidden");
+        popup.style.opacity = "0";
+        popup.style.visibility = "hidden";
+    });
+
+    // Slider functionality
+    document.addEventListener("keydown", (e) => {
+        const images = sliderContainer.children;
+        if (e.key === "ArrowRight") {
+            currentIndex = (currentIndex + 1) % images.length;
+        } else if (e.key === "ArrowLeft") {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+        }
+        sliderContainer.style.transform = `translateX(-${currentIndex * images[0].offsetWidth}px)`;
+    });
 });
 
 
@@ -91,13 +126,13 @@ function loadContent(page, url) {
             document.getElementById(page + '-content').innerHTML = data;
             if (page === 'portofolio') {
                 // Panggil ulang kode filter kategori setelah portofolio dimuat
-                initializePortfolioFilters();
+                initializeportofolioFilters();
             }
         });
 }
 
 // Menangani filter kategori (desktop dan mobile)
-function initializePortfolioFilters() {
+function initializeportofolioFilters() {
     const filterBtns = document.querySelectorAll('[data-filter-btn]');
     const selectItems = document.querySelectorAll('[data-select-item]');
     const projectItems = document.querySelectorAll('.project-item');
@@ -157,7 +192,7 @@ function initializePortfolioFilters() {
 
 
 // Inisialisasi filter ketika halaman dimuat
-document.addEventListener('DOMContentLoaded', initializePortfolioFilters);
+document.addEventListener('DOMContentLoaded', initializeportofolioFilters);
 
 // Fungsi untuk menutup dropdown (jika diperlukan)
 function closeDropdown() {
@@ -293,3 +328,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+// popup portofolio
