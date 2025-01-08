@@ -1013,6 +1013,9 @@ main {
   font-weight: var(--fw-300);
 }
 
+/*-----------------------------------*\
+  #popup
+\*-----------------------------------*/
 
 
 /*-----------------------------------*\
@@ -1232,106 +1235,4 @@ textarea.form-input::-webkit-resizer {
 
 .form-btn:disabled:hover::before {
   background: var(--bg-gradient-jet);
-}
-
-/* Popup yang hanya muncul saat diperlukan */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  /* Background semi-transparan */
-  display: none;
-  /* Popup hanya muncul ketika diaktifkan */
-  justify-content: center;
-  align-items: center;
-}
-
-/* Tampilan konten popup */
-.popup-content {
-  background-color: var(--eerie-black-1);
-  /* Warna latar belakang */
-  padding: 20px;
-  border-radius: 14px;
-  border: 1px solid var(--jet);
-  /* Border yang konsisten */
-  text-align: center;
-  box-shadow: var(--shadow-3);
-  /* Bayangan untuk tampilan lebih elegan */
-}
-
-.popup-content p {
-  color: var(--white-2);
-  /* Warna teks */
-  margin-bottom: 20px;
-  /* Jarak antara teks dan tombol */
-}
-
-/* Tombol di dalam popup disesuaikan dengan gaya .form-btn */
-.popup-content button {
-  position: relative;
-  width: 50%;
-  margin: 0 auto;
-  background: var(--border-gradient-onyx);
-  /* Background tombol */
-  color: var(--orange-yellow-crayola);
-  /* Warna teks tombol */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 20px;
-  border-radius: 14px;
-  font-size: var(--fs-6);
-  /* Ukuran font */
-  text-transform: capitalize;
-  /* Kapitalisasi teks */
-  box-shadow: var(--shadow-3);
-  /* Bayangan tombol */
-  z-index: 1;
-  transition: var(--transition-1);
-  /* Efek transisi */
-}
-
-/* Efek hover tombol */
-.popup-content button:hover {
-  background: var(--bg-gradient-yellow-1);
-  /* Hover effect */
-}
-
-/* Efek sebelum hover untuk tombol */
-.popup-content button::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: var(--bg-gradient-jet);
-  /* Warna border sebelum hover */
-  border-radius: inherit;
-  z-index: -1;
-  transition: var(--transition-1);
-}
-
-/* Efek saat hover tombol */
-.popup-content button:hover::before {
-  background: var(--bg-gradient-yellow-2);
-  /* Warna border saat hover */
-}
-
-/* Tombol dinonaktifkan */
-.popup-content button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-/* Efek saat tombol dinonaktifkan */
-.popup-content button:disabled:hover {
-  background: var(--border-gradient-onyx);
-  /* Warna tombol saat dinonaktifkan */
-}
-
-.popup-content button:disabled:hover::before {
-  background: var(--bg-gradient-jet);
-  /* Warna border tombol dinonaktifkan */
 }

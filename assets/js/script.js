@@ -58,6 +58,7 @@ function switchPage(pageName) {
     }
 }
 
+//navbar mobile
 document.addEventListener('DOMContentLoaded', function () {
     // Menambahkan kelas 'active' pada navbar-link sesuai dengan halaman pertama yang dimuat
     const defaultPage = 'about'; // Sesuaikan dengan halaman pertama yang ingin ditampilkan
@@ -242,90 +243,4 @@ for (let i = 0; i < testimonialsItem.length; i++) {
         testimonialsModalFunc();
     });
 }
-
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
-
-select.addEventListener("click", function () {
-    elementToggleFunc(this);
-});
-
-// Select form and popup elements
-const form = document.querySelector("[data-form]");
-const popupSuccess = document.getElementById("popup-success");
-const closePopupButton = document.getElementById("close-popup");
-
-// Handle form submission
-form.addEventListener("submit", async (event) => {
-  event.preventDefault(); // Prevent default form submission
-
-const formData = new FormData(form);
-
-try {
-    const response = await fetch(form.action, {
-    method: form.method,
-    headers: { Accept: "application/json" },
-    body: formData,
-    });
-
-    if (response.ok) {
-      // Show success popup
-    popupSuccess.style.display = "flex";
-      form.reset(); // Reset form fields
-    } else {
-    alert("Oops! Something went wrong. Please try again.");
-    }
-} catch (error) {
-    alert("There was a problem submitting the form. Please try again later.");
-}
-});
-
-// Handle popup close button
-closePopupButton.addEventListener("click", () => {
-popupSuccess.style.display = "none";
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Variabel form dan popup
-    const form = document.querySelector("[data-form]");
-    const popupSuccess = document.getElementById("popup-success");
-    const closePopupButton = document.getElementById("close-popup");
-
-    if (form) {
-        // Handle form submission
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault(); // Prevent default form submission
-            
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    headers: { Accept: "application/json" },
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    // Tampilkan popup sukses
-                    popupSuccess.style.display = "flex";
-                    form.reset(); // Reset form fields
-                } else {
-                    alert("Oops! Something went wrong. Please try again.");
-                }
-            } catch (error) {
-                alert("There was a problem submitting the form. Please try again later.");
-            }
-        });
-    }
-
-    // Handle popup close button
-    if (closePopupButton) {
-        closePopupButton.addEventListener("click", () => {
-            popupSuccess.style.display = "none";
-        });
-    }
-});
-
 
