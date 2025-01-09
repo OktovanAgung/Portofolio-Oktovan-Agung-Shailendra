@@ -1,20 +1,33 @@
 "use strict";
 
-// element toggle function
+// Element toggle function
 const elementToggleFunc = function (elem) {
     elem.classList.toggle("active");
 };
 
-// sidebar variables
+// Function to load HTML content dynamically
+function loadContent(page, url) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById(page + '-content').innerHTML = data;
+            if (page === 'portofolio') {
+                initializeportofolioFilters(); // Reinitialize portfolio filters
+            }
+        });
+}
+
+// Sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-// sidebar toggle functionality for mobile
+// Sidebar toggle functionality for mobile
 sidebarBtn.addEventListener("click", function () {
     elementToggleFunc(sidebar);
 });
 
-// Fungsi untuk menangani transisi antar halaman
+
+// Function to handle page transitions
 function switchPage(pageName) {
     const allPages = document.querySelectorAll('.page');
     allPages.forEach(page => page.classList.remove('active'));
@@ -58,93 +71,46 @@ function switchPage(pageName) {
     }
 }
 
-//navbar mobile
+// Navbar mobile and default page setup
 document.addEventListener('DOMContentLoaded', function () {
-    // Menambahkan kelas 'active' pada navbar-link sesuai dengan halaman pertama yang dimuat
-    const defaultPage = 'about'; // Sesuaikan dengan halaman pertama yang ingin ditampilkan
+    const defaultPage = 'about'; // Default page to display
     const defaultButton = document.querySelector(`[data-page="${defaultPage}"]`);
     if (defaultButton) {
         defaultButton.classList.add('active');
     }
 
-    // Menambahkan event listener untuk navbar link
     document.querySelectorAll('.navbar-link').forEach(button => {
-        button.addEventListener('click', function(event) {
+        button.addEventListener('click', function (event) {
             const targetPage = event.target.getAttribute('data-page');
             switchPage(targetPage);
-            // Menghapus kelas 'active' dari semua tombol navbar
-            document.querySelectorAll('.navbar-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            // Menambahkan kelas 'active' pada tombol yang diklik
+
+            // Update navbar link active class
+            document.querySelectorAll('.navbar-link').forEach(link => link.classList.remove('active'));
             event.target.classList.add('active');
         });
     });
-    const popup = document.getElementById("portfolio-popup");
-    const closePopupButton = document.querySelector(".close-popup");
-    const projectItems = document.querySelectorAll(".project-item");
-    const sliderContainer = document.querySelector(".slider-container");
-
-    if (!popup || !closePopupButton || !sliderContainer) return;
-
-    let currentIndex = 0;
-
-    // Show popup on project item click
-    projectItems.forEach((item) => {
-        item.addEventListener("click", () => {
-            popup.classList.remove("hidden");
-            popup.style.opacity = "1";
-            popup.style.visibility = "visible";
-        });
-    });
-
-    // Close popup
-    closePopupButton.addEventListener("click", () => {
-        popup.classList.add("hidden");
-        popup.style.opacity = "0";
-        popup.style.visibility = "hidden";
-    });
-
-    // Slider functionality
-    document.addEventListener("keydown", (e) => {
-        const images = sliderContainer.children;
-        if (e.key === "ArrowRight") {
-            currentIndex = (currentIndex + 1) % images.length;
-        } else if (e.key === "ArrowLeft") {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-        }
-        sliderContainer.style.transform = `translateX(-${currentIndex * images[0].offsetWidth}px)`;
-    });
 });
 
+// Memuat konten setiap halaman
+loadContent('about', './assets/html/about.html');
+/*loadContent('testimonial', './assets/html/testimonial_clients.html');*/
+loadContent('resume', './assets/html/resume.html');
+loadContent('portofolio', './assets/html/portofolio.html');
+loadContent('blog', './assets/html/blog.html');
+loadContent('contact', './assets/html/contact.html');   
 
-// Function to load HTML content dynamically
-// Fungsi untuk memuat konten
-function loadContent(page, url) {
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById(page + '-content').innerHTML = data;
-            if (page === 'portofolio') {
-                // Panggil ulang kode filter kategori setelah portofolio dimuat
-                initializeportofolioFilters();
-            }
-        });
-}
-
-// Menangani filter kategori (desktop dan mobile)
+// Initialize portfolio filters
 function initializeportofolioFilters() {
     const filterBtns = document.querySelectorAll('[data-filter-btn]');
     const selectItems = document.querySelectorAll('[data-select-item]');
     const projectItems = document.querySelectorAll('.project-item');
     const filterSelect = document.querySelector('.filter-select');
     const selectList = document.querySelector('.select-list');
-    
-    // Fungsi untuk menyaring proyek berdasarkan kategori
+
+    // Filter projects by category
     function filterProjects(category) {
         projectItems.forEach(project => {
             const projectCategory = project.getAttribute('data-category');
-            // Menampilkan proyek jika kategori cocok atau 'All' dipilih
             if (category === 'all' || projectCategory === category) {
                 project.classList.add('active');
             } else {
@@ -153,7 +119,7 @@ function initializeportofolioFilters() {
         });
     }
 
-    // Event listener untuk tombol filter kategori (desktop)
+    // Desktop filter buttons
     filterBtns.forEach(button => {
         button.addEventListener('click', (e) => {
             const selectedCategory = e.target.textContent.trim().toLowerCase();
@@ -163,84 +129,27 @@ function initializeportofolioFilters() {
         });
     });
 
-    // Event listener untuk item dropdown kategori (mobile)
+    // Mobile dropdown filter
     selectItems.forEach(item => {
         item.addEventListener('click', (e) => {
             const selectedCategory = e.target.textContent.trim().toLowerCase();
-            filterProjects(selectedCategory); // Menyaring proyek berdasarkan kategori
-            closeDropdown(); // Menutup dropdown setelah kategori dipilih
+            filterProjects(selectedCategory);
+            closeDropdown();
         });
     });
-    
-    function closeDropdown() {
-        const filterSelect = document.querySelector('.filter-select');
-        const selectList = document.querySelector('.select-list');
-        filterSelect.classList.remove('active');  // Hapus class 'active' untuk menutup dropdown
-        selectList.classList.remove('active');   // Hapus class 'active' untuk menutup dropdown
-    }
-    
 
-    // Fungsi untuk membuka/menutup dropdown saat tombol filter dipilih
+    function closeDropdown() {
+        filterSelect.classList.remove('active');
+        selectList.classList.remove('active');
+    }
+
     filterSelect.addEventListener('click', () => {
-        filterSelect.classList.toggle('active'); // Menambahkan/menanggalkan class 'active'
-        selectList.classList.toggle('active'); // Menampilkan/menyembunyikan daftar dropdown
+        filterSelect.classList.toggle('active');
+        selectList.classList.toggle('active');
     });
 
-    // Menyaring proyek berdasarkan kategori awal (All)
+    // Initialize with all projects
     filterProjects('all');
 }
 
-
-
-// Inisialisasi filter ketika halaman dimuat
 document.addEventListener('DOMContentLoaded', initializeportofolioFilters);
-
-// Fungsi untuk menutup dropdown (jika diperlukan)
-function closeDropdown() {
-    const dropdown = document.querySelector('.dropdown'); // Sesuaikan dengan class atau ID dropdown kamu
-    if (dropdown) {
-        dropdown.classList.remove('open'); // Menutup dropdown
-    }
-}
-
-
-// Memuat konten setiap halaman
-loadContent('about', './assets/html/about.html');
-/*loadContent('testimonial', './assets/html/testimonial_clients.html');*/
-loadContent('resume', './assets/html/resume.html');
-loadContent('portofolio', './assets/html/portofolio.html');
-loadContent('blog', './assets/html/blog.html');
-loadContent('contact', './assets/html/contact.html');  
-
-// testimonials variables
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
-
-// modal variable
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-// modal toggle function
-const testimonialsModalFunc = function () {
-    modalContainer.classList.toggle("active");
-    overlay.classList.toggle("active");
-};
-
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-    testimonialsItem[i].addEventListener("click", function () {
-        modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-        modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-        modalTitle.innerHTML = this.querySelector(
-            "[data-testimonials-title]"
-        ).innerHTML;
-        modalText.innerHTML = this.querySelector(
-            "[data-testimonials-text]"
-        ).innerHTML;
-        testimonialsModalFunc();
-    });
-}
-
