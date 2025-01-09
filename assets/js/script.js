@@ -5,17 +5,6 @@ const elementToggleFunc = function (elem) {
     elem.classList.toggle("active");
 };
 
-// Function to load HTML content dynamically
-function loadContent(page, url) {
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById(page + '-content').innerHTML = data;
-            if (page === 'portofolio') {
-                initializeportofolioFilters(); // Reinitialize portfolio filters
-            }
-        });
-}
 
 // Sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
@@ -25,7 +14,6 @@ const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 sidebarBtn.addEventListener("click", function () {
     elementToggleFunc(sidebar);
 });
-
 
 // Function to handle page transitions
 function switchPage(pageName) {
@@ -91,13 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Memuat konten setiap halaman
-loadContent('about', './assets/html/about.html');
-/*loadContent('testimonial', './assets/html/testimonial_clients.html');*/
-loadContent('resume', './assets/html/resume.html');
-loadContent('portofolio', './assets/html/portofolio.html');
-loadContent('blog', './assets/html/blog.html');
-loadContent('contact', './assets/html/contact.html');   
 
 // Initialize portfolio filters
 function initializeportofolioFilters() {
@@ -155,5 +136,73 @@ function initializeportofolioFilters() {
 document.addEventListener('DOMContentLoaded', initializeportofolioFilters);
 
 
-
-//popup modal
+document.addEventListener("DOMContentLoaded", () => {
+    // Ambil semua project item
+    const projectItems = document.querySelectorAll(".project-item");
+  
+    // Event listener untuk setiap project item
+    projectItems.forEach((item) => {
+      item.addEventListener("click", (event) => {
+        event.preventDefault();
+  
+        // Ambil id project
+        const projectId = item.getAttribute("data-project-id");
+  
+        // Temukan modal popup yang sesuai
+        const popupModal = document.querySelector(`#popup-project-${projectId}`);
+        if (popupModal) {
+          // Tampilkan modal popup
+          popupModal.classList.add("active");
+  
+          // Aktifkan slide gambar
+          initPopupGallery(popupModal);
+        }
+      });
+    });
+  
+    // Event listener untuk tombol close pada popup
+    const closeButtons = document.querySelectorAll(".popup-close");
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const popupModal = button.closest(".popup-modal");
+        if (popupModal) {
+          popupModal.classList.remove("active");
+        }
+      });
+    });
+  
+    // Fungsi untuk inisialisasi gallery
+    function initPopupGallery(popupModal) {
+      const imagesContainer = popupModal.querySelector(".popup-images");
+      const images = imagesContainer.querySelectorAll("img");
+      let currentIndex = 0;
+  
+      // Tampilkan gambar pertama
+      images.forEach((img, index) => {
+        img.style.display = index === currentIndex ? "block" : "none";
+      });
+  
+      // Tambahkan event listener ke tombol prev dan next hanya sekali
+      const prevButton = popupModal.querySelector(".popup-prev");
+      const nextButton = popupModal.querySelector(".popup-next");
+  
+      // Hapus listener lama jika sudah ada
+      prevButton.onclick = null;
+      nextButton.onclick = null;
+  
+      // Event listener tombol prev
+      prevButton.onclick = () => {
+        images[currentIndex].style.display = "none"; // Sembunyikan gambar sekarang
+        currentIndex = (currentIndex - 1 + images.length) % images.length; // Perbarui index
+        images[currentIndex].style.display = "block"; // Tampilkan gambar baru
+      };
+  
+      // Event listener tombol next
+      nextButton.onclick = () => {
+        images[currentIndex].style.display = "none"; // Sembunyikan gambar sekarang
+        currentIndex = (currentIndex + 1) % images.length; // Perbarui index
+        images[currentIndex].style.display = "block"; // Tampilkan gambar baru
+      };
+    }
+  });
+  

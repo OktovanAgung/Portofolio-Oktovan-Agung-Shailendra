@@ -984,8 +984,8 @@ main {
 }
 
 .project-img img {
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
   transition: var(--transition-1);
 }
@@ -1014,102 +1014,121 @@ main {
 }
 
 /*-----------------------------------*\
-  #popup portofolio
+  #POPUP MODAL
 \*-----------------------------------*/
 
-/* Popup Modal Styles */
 .popup-modal {
   display: none;
-  /* Hidden by default */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
-  /* Semi-transparent background */
-  z-index: 9999;
+  z-index: 1000;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.popup-modal.active {
+  display: flex;
+  opacity: 1;
 }
 
 .popup-content {
-  background: var(--eerie-black-2);
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 900px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: var(--eerie-black-1);
+  padding: 30px;
+  border-radius: 16px;
   position: relative;
+  max-width: 800px;
+  width: 90%;
 }
 
 .popup-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
   color: var(--light-gray);
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.popup-gallery {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+.popup-close:hover {
+  color: var(--orange-yellow-crayola);
 }
 
 .popup-prev,
 .popup-next {
-  background: none;
-  border: none;
-  font-size: 30px;
+  background: var(--eerie-black-2);
   color: var(--light-gray);
+  font-size: 30px;
+  padding: 10px;
+  border-radius: 50%;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.popup-prev:hover,
+.popup-next:hover {
+  background: var(--jet);
+}
+
+.popup-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .popup-images {
   display: flex;
-  overflow: hidden;
-  width: 70%;
+  justify-content: center;
+  gap: 15px;
 }
 
 .popup-images img {
-  width: 100%;
-  height: auto;
+  width: 400px;
+  height: 300px;
+  border-radius: 10px;
   object-fit: cover;
+  /* Agar gambar tetap terjaga proporsinya */
   display: none;
-  /* Hide all images initially */
+  /* Semua gambar disembunyikan pada awalnya */
 }
 
 .popup-images img.active {
   display: block;
-  /* Show only active image */
+  /* Gambar yang aktif ditampilkan */
 }
 
+
 .popup-description {
-  text-align: center;
-  color: var(--light-gray);
+  margin-top: 20px;
 }
 
 .popup-title {
-  font-size: var(--fs-5);
+  font-size: var(--fs-4);
   font-weight: var(--fw-400);
+  color: var(--light-gray);
+  margin-bottom: 10px;
 }
 
 .popup-category {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   color: var(--light-gray-70);
+  margin-bottom: 15px;
 }
 
 .popup-details {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
-  color: var(--light-gray-70);
-  margin-top: 10px;
+  color: var(--light-gray);
 }
+
 
 
 /*-----------------------------------*\
