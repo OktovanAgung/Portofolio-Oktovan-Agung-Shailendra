@@ -1,0 +1,22 @@
+.popup-images img {
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: none;
+}
+
+.popup-images img {
+    max-width: 400px;
+    max-height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: none;
+}
+
+.service-icon-box img {
+    width: 30%;
+    max-width: 200px;
+    height: auto;
+
+}

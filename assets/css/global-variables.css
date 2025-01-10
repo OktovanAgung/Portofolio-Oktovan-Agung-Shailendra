@@ -118,6 +118,14 @@
         height: auto;
         /* Menjaga proporsi */
     }
+
+    .popup-images img {
+        max-width: 400px;
+        max-height: 300px;
+        border-radius: 10px;
+        object-fit: contain;
+        display: none;
+    }
 }
 
 /**
@@ -451,6 +459,14 @@
         height: auto;
         /* Menjaga proporsi */
     }
+
+    .popup-images img {
+        max-width: 400px;
+        max-height: 300px;
+        border-radius: 10px;
+        object-fit: contain;
+        display: none;
+    }
 }
 
 /**
@@ -563,6 +579,14 @@
         max-width: 200px;
         height: auto;
         /* Menjaga proporsi */
+    }
+
+    .popup-images img {
+        max-width: 400px;
+        max-height: 300px;
+        border-radius: 10px;
+        object-fit: contain;
+        display: none;
     }
 }
 
