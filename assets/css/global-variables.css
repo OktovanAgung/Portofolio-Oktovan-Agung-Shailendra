@@ -111,6 +111,13 @@
     .blog-banner-box {
         height: auto;
     }
+
+    .service-icon-box img {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        /* Menjaga proporsi */
+    }
 }
 
 /**
@@ -437,6 +444,13 @@
     .form-btn ion-icon {
         font-size: 18px;
     }
+
+    .service-icon-box img {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        /* Menjaga proporsi */
+    }
 }
 
 /**
@@ -542,6 +556,13 @@
     .form-btn {
         width: max-content;
         margin-left: auto;
+    }
+
+    .service-icon-box img {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        /* Menjaga proporsi */
     }
 }
 

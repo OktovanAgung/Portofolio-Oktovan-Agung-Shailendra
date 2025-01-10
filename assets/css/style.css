@@ -479,9 +479,13 @@ main {
   z-index: -1;
 }
 
-.service-icon-box {
-  margin-bottom: 10px;
+.service-icon-box img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  /* Menjaga proporsi */
 }
+
 
 .service-icon-box img {
   margin: auto;
