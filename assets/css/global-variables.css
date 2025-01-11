@@ -604,7 +604,6 @@
     .sidebar,
     article {
         width: 950px;
-        box-shadow: var(--shadow-5);
     }
 
     /**

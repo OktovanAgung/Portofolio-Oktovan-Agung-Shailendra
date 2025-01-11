@@ -69,7 +69,7 @@ body {
   border: 1px solid var(--jet);
   border-radius: 20px;
   padding: 15px;
-  box-shadow: var(--shadow-1);
+
   z-index: 1;
 }
 
@@ -78,7 +78,6 @@ article {
   display: none;
   border-radius: 20px;
   padding: 15px;
-  box-shadow: var(--shadow-1);
   z-index: 1;
 }
 
@@ -558,7 +557,6 @@ main {
   transform: translate(15px, -25px);
   background: var(--bg-gradient-onyx);
   border-radius: 14px;
-  box-shadow: var(--shadow-1);
 }
 
 .testimonials-item-title {
@@ -633,7 +631,6 @@ main {
   margin: 15px 12px;
   border: 1px solid var(--jet);
   border-radius: 14px;
-  box-shadow: var(--shadow-5);
   transform: scale(1.2);
   opacity: 0;
   transition: var(--transition-1);
@@ -1057,21 +1054,31 @@ main {
 
 .popup-content {
   background: var(--eerie-black-1);
-  padding: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   border-radius: 16px;
   position: relative;
-  max-width: 800px;
-  width: 90%;
+  max-height: 100%;
+  max-width: 100%;
+  height: 600px;
+  width: 800px;
 }
 
 .popup-close {
   position: absolute;
   top: 15px;
   right: 15px;
-  font-size: 24px;
+  font-size: 30px;
   color: var(--light-gray);
   cursor: pointer;
   transition: color 0.2s ease;
+  z-index: 1000;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-close:hover {
@@ -1082,31 +1089,49 @@ main {
 .popup-next {
   color: var(--light-gray);
   font-size: 30px;
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  height: 100%;
+  position: absolute;
 }
 
+.popup-prev:hover,
+.popup-next:hover {
+  background-color: var(--light-gray-20);
+  color: var(--orange-yellow-crayola);
+  border-radius: 5px;
+}
+
+.popup-next {
+  right: 100px;
+}
+
+.popup-prev {
+  left: 100px;
+}
 
 .popup-gallery {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
   position: relative;
+  max-height: 392px;
+  height: 100%;
 }
 
 .popup-images {
   display: flex;
   justify-content: center;
   gap: 15px;
+  position: relative;
 }
 
 .popup-images img {
   width: 100%;
   height: 100%;
-  max-width: 400px;
-  max-height: 300px;
+  max-width: 500px;
+  max-height: 392px;
   border-radius: 10px;
   object-fit: contain;
   display: none;
@@ -1119,21 +1144,20 @@ main {
 
 
 .popup-description {
-  margin-top: 20px;
+  max-height: 168px;
+  padding-top: 10px;
+  /* 30% dari 560px */
+  height: 100%;
+
 }
 
 .popup-header {
   display: flex;
   align-items: center;
-  /* Menyelaraskan teks secara vertikal */
   gap: 10px;
-  /* Jarak horizontal antara elemen */
   border-bottom: 1px solid var(--light-gray-70);
-  /* Tambahkan garis pemisah */
   padding-bottom: 10px;
-  /* Jarak antara garis dan konten di atasnya */
   margin-bottom: 15px;
-  /* Jarak antara garis dan konten di bawahnya */
 }
 
 .popup-title {

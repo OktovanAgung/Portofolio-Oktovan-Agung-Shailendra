@@ -1,19 +1,24 @@
-.avatar-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
-    height: 150px;
-    border-radius: 20px;
-    overflow: hidden;
-    background-color: var(--eerie-black-1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+.popup-prev,
+.popup-next {
+    color: var(--light-gray);
+    font-size: 30px;
+    background-color: red;
+    border: 1px blue;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.avatar-box img {
-    width: 100%;
+
+/*MOBILE*/
+
+.popup-gallery {
+    display: flex;
+    justify-content: center;
+    background-color: yellowgreen;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    max-height: 290px;
     height: 100%;
-    object-fit: cover;
-    /* Agar gambar menyesuaikan tanpa terdistorsi */
 }
