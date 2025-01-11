@@ -258,9 +258,23 @@ main {
 }
 
 .avatar-box {
-  background: var(--bg-gradient-onyx);
-  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: var(--eerie-black-1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.avatar-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
 .info-content .name {
   color: var(--white-2);
