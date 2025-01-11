@@ -1102,9 +1102,6 @@ main {
   border-radius: 5px;
 }
 
-
-
-
 .popup-gallery {
   display: flex;
   justify-content: center;
@@ -1171,6 +1168,198 @@ main {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   color: var(--light-gray);
+}
+
+/*-----------------------------------*\
+  #Popup Contact
+\*-----------------------------------*/
+
+/* Popup khusus untuk form kontak */
+
+.contact-popup.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.contact-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1000;
+  transition: visibility 0s, opacity 0.3s;
+}
+
+.contact-popup .popup-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 250px;
+  background: var(--eerie-black-1);
+  padding: 20px 30px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
+  position: relative;
+  z-index: 1;
+}
+
+/* Menambahkan efek border dan background gradient */
+.contact-popup .popup-content::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  /* Gradient background */
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* Ikon untuk popup success dan error */
+.popup-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.popup-icon.success {
+  color: green;
+}
+
+.popup-icon.error {
+  color: red;
+}
+
+.contact-popup .popup-content p {
+  font-size: var(--fs-4);
+  margin-bottom: 15px;
+  color: var(--light-gray);
+}
+
+.contact-popup .popup-content button {
+  padding: 10px 20px;
+  font-size: var(--fs-6);
+  background-color: var(--orange-yellow-crayola);
+  color: var(--light-gray);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-popup .popup-content button:hover {
+  background-color: var(--light-gray-20);
+}
+
+.contact-popup .popup-content button:focus {
+  outline: none;
+  transform: scale(1.05);
+}
+
+/* Animasi untuk popup */
+@keyframes popupFadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Animasi ikon */
+.contact-popup .popup-content .popup-icon {
+  animation: bounceIcon 0.5s ease;
+}
+
+@keyframes bounceIcon {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.popup-btn {
+  position: relative;
+  width: 100%;
+  background: var(--border-gradient-onyx);
+  color: var(--orange-yellow-crayola);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border-radius: 14px;
+  font-size: var(--fs-6);
+  text-transform: capitalize;
+  box-shadow: var(--shadow-3);
+  z-index: 1;
+  transition: var(--transition-1);
+}
+
+/* Efek latar belakang tombol dengan gradient */
+.popup-btn::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+  transition: var(--transition-1);
+}
+
+/* Ukuran ikon pada tombol */
+.popup-btn ion-icon {
+  font-size: 16px;
+}
+
+/* Efek hover pada tombol */
+.popup-btn:hover {
+  background: var(--bg-gradient-yellow-1);
+}
+
+.popup-btn:hover::before {
+  background: var(--bg-gradient-yellow-2);
+}
+
+/* Gaya saat tombol dinonaktifkan */
+.popup-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.popup-btn:disabled:hover {
+  background: var(--border-gradient-onyx);
+}
+
+.popup-btn:disabled:hover::before {
+  background: var(--bg-gradient-jet);
 }
 
 

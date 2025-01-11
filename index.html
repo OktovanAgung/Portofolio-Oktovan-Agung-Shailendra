@@ -466,7 +466,8 @@
         </section>
         <section class="contact-form">
           <h3 class="h3 form-title">Contact Form</h3>
-          <form action="https://formspree.io/f/mgvvpzno" method="POST" class="form" data-form novalidate>
+          <form action="https://formspree.io/f/mgvvpzno" method="POST" class="form" data-form novalidate
+            onsubmit="handleSubmit(event)">
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
               <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
@@ -477,6 +478,29 @@
               <span>Send Message</span>
             </button>
           </form>
+
+          <!-- Popup Success -->
+          <div class="contact-popup" id="success-popup">
+            <div class="popup-content">
+              <ion-icon name="checkmark-circle" class="popup-icon success"></ion-icon>
+              <p>Pesan Anda berhasil dikirim!</p>
+              <button class="popup-btn" onclick="closePopup('success-popup')">
+                OK
+              </button>
+            </div>
+          </div>
+
+          <!-- Popup Error -->
+          <div class="contact-popup" id="error-popup">
+            <div class="popup-content">
+              <ion-icon name="alert-circle" class="popup-icon error"></ion-icon>
+              <p>Pesan tidak boleh kosong. Pastikan semua kolom terisi.</p>
+              <button class="popup-btn" onclick="closePopup('error-popup')">
+                OK
+              </button>
+            </div>
+          </div>
+
         </section>
 
       </article>
@@ -486,7 +510,6 @@
     - custom js link
   -->
   <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/category.js"></script>
   <!--
     - ionicon link
   -->
