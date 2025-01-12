@@ -189,57 +189,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-function initPopupGallery(popupModal) {
-    const imagesContainer = popupModal.querySelector(".popup-images");
-    const images = imagesContainer.querySelectorAll("img");
-    const totalImages = images.length;
-    let currentIndex = 0;
-
-    // Fungsi untuk memperbarui posisi gambar dengan animasi
-    const updateSlide = () => {
-        const offset = -currentIndex * 100; // Hitung posisi berdasarkan index
-        imagesContainer.style.transform = `translateX(${offset}%)`;
-    };
-
-    // Tombol prev dan next
-    const prevButton = popupModal.querySelector(".popup-prev");
-    const nextButton = popupModal.querySelector(".popup-next");
-
-    prevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-        updateSlide();
-    });
-
-    nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % totalImages;
-        updateSlide();
-    });
-
-    // Swipe gesture handling untuk perangkat mobile
-    let startX = 0;
-    let endX = 0;
-
-    imagesContainer.addEventListener("touchstart", (event) => {
-        startX = event.touches[0].clientX;
-    });
-
-    imagesContainer.addEventListener("touchmove", (event) => {
-        endX = event.touches[0].clientX;
-    });
-
-    imagesContainer.addEventListener("touchend", () => {
-        if (startX > endX + 50) {
-            // Geser ke kiri (next)
-            currentIndex = (currentIndex + 1) % totalImages;
-            updateSlide();
-        } else if (startX < endX - 50) {
-            // Geser ke kanan (prev)
-            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-            updateSlide();
-        }
-    });
-}
-
 
 
 
