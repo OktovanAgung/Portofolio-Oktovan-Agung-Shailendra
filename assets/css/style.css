@@ -1131,13 +1131,23 @@ main {
   /* Gambar yang aktif ditampilkan */
 }
 
+.popup-images video {
+  width: 100%;
+  /* Video menyesuaikan lebar container */
+  max-height: 400px;
+  /* Membatasi tinggi maksimal video */
+  border-radius: 8px;
+  /* Membuat sudut video melengkung */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  /* Menambahkan bayangan pada video */
+}
+
 
 .popup-description {
   max-height: 168px;
   padding-top: 10px;
   /* 30% dari 560px */
   height: 100%;
-
 }
 
 .popup-header {
