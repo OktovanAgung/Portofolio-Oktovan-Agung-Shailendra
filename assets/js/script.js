@@ -192,11 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
 function initPopupGallery(popupModal) {
     const imagesContainer = popupModal.querySelector(".popup-images");
     const images = imagesContainer.querySelectorAll("img");
+    const totalImages = images.length;
     let currentIndex = 0;
 
-    // Fungsi untuk memperbarui posisi slider
+    // Fungsi untuk memperbarui posisi gambar dengan animasi
     const updateSlide = () => {
-        const offset = -currentIndex * 100; // Geser container sebesar lebar gambar
+        const offset = -currentIndex * 100; // Hitung posisi berdasarkan index
         imagesContainer.style.transform = `translateX(${offset}%)`;
     };
 
@@ -204,17 +205,17 @@ function initPopupGallery(popupModal) {
     const prevButton = popupModal.querySelector(".popup-prev");
     const nextButton = popupModal.querySelector(".popup-next");
 
-    prevButton.onclick = () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
+    prevButton.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
         updateSlide();
-    };
+    });
 
-    nextButton.onclick = () => {
-        currentIndex = (currentIndex + 1) % images.length;
+    nextButton.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % totalImages;
         updateSlide();
-    };
+    });
 
-    // Swipe gesture handling
+    // Swipe gesture handling untuk perangkat mobile
     let startX = 0;
     let endX = 0;
 
@@ -229,11 +230,11 @@ function initPopupGallery(popupModal) {
     imagesContainer.addEventListener("touchend", () => {
         if (startX > endX + 50) {
             // Geser ke kiri (next)
-            currentIndex = (currentIndex + 1) % images.length;
+            currentIndex = (currentIndex + 1) % totalImages;
             updateSlide();
         } else if (startX < endX - 50) {
             // Geser ke kanan (prev)
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
             updateSlide();
         }
     });

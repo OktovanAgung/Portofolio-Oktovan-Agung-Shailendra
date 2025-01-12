@@ -1119,7 +1119,6 @@ main {
   touch-action: pan-y;
   overflow: hidden;
   position: relative;
-  transition: transform 0.4s ease-in-out;
 }
 
 .popup-images img {
@@ -1128,7 +1127,6 @@ main {
   border-radius: 10px;
   object-fit: contain;
   display: none;
-  flex-shrink: 0;
 }
 
 .popup-images img.active {
