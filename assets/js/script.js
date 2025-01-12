@@ -124,6 +124,13 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", () => {
             const popupModal = button.closest(".popup-modal");
             if (popupModal) {
+                // Pause semua video dalam popup sebelum menutupnya
+                const videos = popupModal.querySelectorAll("video");
+                videos.forEach((video) => {
+                    video.pause(); // Jeda video
+                    video.currentTime = 0; // Reset waktu video ke awal
+                });
+
                 popupModal.classList.remove("active");
             }
         });
@@ -181,6 +188,57 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+function initPopupGallery(popupModal) {
+    const imagesContainer = popupModal.querySelector(".popup-images");
+    const images = imagesContainer.querySelectorAll("img");
+    let currentIndex = 0;
+
+    // Fungsi untuk memperbarui posisi slider
+    const updateSlide = () => {
+        const offset = -currentIndex * 100; // Geser container sebesar lebar gambar
+        imagesContainer.style.transform = `translateX(${offset}%)`;
+    };
+
+    // Tombol prev dan next
+    const prevButton = popupModal.querySelector(".popup-prev");
+    const nextButton = popupModal.querySelector(".popup-next");
+
+    prevButton.onclick = () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateSlide();
+    };
+
+    nextButton.onclick = () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateSlide();
+    };
+
+    // Swipe gesture handling
+    let startX = 0;
+    let endX = 0;
+
+    imagesContainer.addEventListener("touchstart", (event) => {
+        startX = event.touches[0].clientX;
+    });
+
+    imagesContainer.addEventListener("touchmove", (event) => {
+        endX = event.touches[0].clientX;
+    });
+
+    imagesContainer.addEventListener("touchend", () => {
+        if (startX > endX + 50) {
+            // Geser ke kiri (next)
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSlide();
+        } else if (startX < endX - 50) {
+            // Geser ke kanan (prev)
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSlide();
+        }
+    });
+}
+
 
 
 
